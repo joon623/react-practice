@@ -1,31 +1,31 @@
 import { useRecoilState } from 'recoil';
 import { todoListState } from '../../store/todoList';
 
-export default function TodoItem({ item }) {
+const TodoItem = ({ item }) => {
   const [todoList, setTodoList] = useRecoilState(todoListState);
-  const index = todoList.findIndex((listItem) => listItem === item);
+  const index = todoList.findIndex((list) => list === item);
 
   const editItemText = ({ target: { value } }) => {
-    const newList = replaceItemAtIndex(todoList, index, {
-      ...item,
-      text: value,
-    });
-    setTodoList(newList);
+    setTodoList([
+      ...todoList.slice(0, index),
+      { ...item, text: value },
+      ...todoList.slice(index + 1),
+    ]);
   };
 
   const toggleItemCompletion = () => {
-    const newList = replaceItemAtIndex(todoList, index, {
-      ...item,
-      isComplete: !item.isComplete,
-    });
-
-    setTodoList(newList);
+    setTodoList([
+      ...todoList.slice(0, index),
+      {
+        ...item,
+        isComplete: !item.isComplete,
+      },
+      ...todoList.slice(index + 1),
+    ]);
   };
 
   const deleteItem = () => {
-    const newList = removeItemAtIndex(todoList, index);
-
-    setTodoList(newList);
+    setTodoList([...todoList.slice(0, index), ...todoList.slice(index + 1)]);
   };
 
   return (
@@ -39,12 +39,6 @@ export default function TodoItem({ item }) {
       <button onClick={deleteItem}>X</button>
     </div>
   );
-}
+};
 
-function replaceItemAtIndex(arr, index, newValue) {
-  return [...arr.slice(0, index), newValue, ...arr.slice(index + 1)];
-}
-
-function removeItemAtIndex(arr, index) {
-  return [...arr.slice(0, index), ...arr.slice(index + 1)];
-}
+export default TodoItem;

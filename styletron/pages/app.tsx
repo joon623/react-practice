@@ -9,7 +9,7 @@ const App = (): NextPage => {
     console.log("render")
     const [isActive, setIsActive] = useState(false)
 
-    const Button = useMemo(() => styled('button', props => {
+    const Button = useMemo(() => styled<any>('button', props => {
         return {
             padding: "0.5em 1em",
             color: props.$isActive ? "#fff" : "#000",
@@ -23,6 +23,7 @@ const App = (): NextPage => {
         }
     }), []);
 
+
     return (
         <>
             <Button
@@ -31,6 +32,7 @@ const App = (): NextPage => {
                     setIsActive(!isActive)
                 }}
             >It is {isActive ? "on" : "off"}</Button>
+
             <TextExample/>
             <BoringTextExample/>
             <MostBoaringTextExample/>

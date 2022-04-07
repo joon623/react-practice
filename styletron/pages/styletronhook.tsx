@@ -10,7 +10,7 @@ const THEME = {
 };
 
 const MyComponent = () => {
-    const inputRef = useRef(null);
+    const inputRef = useRef<HTMLInputElement | null>(null);
     const [css] = useStyletron();
 
     const Input = styled('input', {background: "#FFE1A5"})

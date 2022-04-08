@@ -19,6 +19,7 @@
     "react-dom": "18.0.0",
     "react-query": "^3.34.19",
     "react-use": "^17.3.2",
+    "recoil": "^0.7.0",
     "styletron-engine-atomic": "^1.4.8",
     "styletron-react": "^6.0.2"
   },

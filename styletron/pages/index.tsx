@@ -1,30 +1,8 @@
 import type {NextPage} from 'next'
 import {styled, useStyletron, withTransform} from "styletron-react";
-import {useMutation, useQuery, useQueryClient} from "react-query";
 
-const getTodos = () => {
-
-}
-
-const postTodo = () => {
-
-}
 const Home: NextPage = () => {
-    const queryClient = useQueryClient()
-    // const [hoverRef, hoverd] = useHover()
-
     const [css] = useStyletron();
-
-    // Queries
-    const query = useQuery('todos', getTodos)
-
-    // Mutations
-    const mutations = useMutation(postTodo, {
-        onSuccess: () => {
-            // Invalidate and refetch
-            queryClient.invalidateQueries('todos')
-        }
-    })
 
     const Content = styled('div', {
         border: '2px solid black',
@@ -32,10 +10,8 @@ const Home: NextPage = () => {
     });
 
     const Foo = styled('div');
-
+    
     const Bar = withTransform(Foo, (style, props) => {
-        console.log(style)
-        console.log(props)
         let display =
             style.display === "none"
                 ? "none"
@@ -44,7 +20,6 @@ const Home: NextPage = () => {
                     : "flex";
         return {...style, display};
     })
-
 
     return (
         <>

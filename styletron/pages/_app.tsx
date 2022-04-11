@@ -9,6 +9,7 @@ import '../styles/globals.css';
 const queryClient = new QueryClient();
 
 function MyApp({ Component, pageProps }: AppProps) {
+  console.log(Component);
   return (
     <RecoilRoot>
       <QueryClientProvider client={queryClient}>

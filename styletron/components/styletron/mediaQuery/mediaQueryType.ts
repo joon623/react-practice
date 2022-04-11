@@ -1,3 +1,3 @@
 export type MediaQueryButtonType = {
-    $compact?: boolean
-}
+  $compact?: boolean;
+};

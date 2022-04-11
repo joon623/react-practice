@@ -1,38 +1,22 @@
-import type {NextPage} from 'next'
-import {styled, useStyletron, withTransform} from "styletron-react";
+import type { NextPage } from 'next';
+import { useStyletron } from 'styletron-react';
+import SelectorButton from '../components/styletron/button/selectorButton';
+import WithStyle from '../components/styletron/button/withStyle';
+import WithTransform from '../components/styletron/button/withTransform';
+import WithWrapper from '../components/styletron/button/withWrapper';
 
 const Home: NextPage = () => {
-    const [css] = useStyletron();
+  const [css] = useStyletron();
 
-    const Content = styled('div', {
-        border: '2px solid black',
-        borderWidth: '5px'
-    });
+  return (
+    <div className={css({ padding: '10px' })}>
+      <SelectorButton />
+      withstyle
+      <WithStyle />
+      <WithTransform />
+      <WithWrapper />
+    </div>
+  );
+};
 
-    const Foo = styled('div');
-    
-    const Bar = withTransform(Foo, (style, props) => {
-        let display =
-            style.display === "none"
-                ? "none"
-                : props.$inline === true
-                    ? "inline-flex"
-                    : "flex";
-        return {...style, display};
-    })
-
-    return (
-        <>
-            <Content $style={{height: "300px"}} hello/>
-            <Bar>Bar</Bar>
-            <button className={css({color: "red"})}>
-                Red Button
-            </button>
-            <button className={css({color: "blue"})}>
-                Blue Button
-            </button>
-        </>
-    )
-}
-
-export default Home
+export default Home;

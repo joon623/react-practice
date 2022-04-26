@@ -21,15 +21,20 @@ const TodoItemCreator = () => {
   };
 
   return (
-    <div>
+    <form
+      onSubmit={(e) => {
+        e.preventDefault();
+      }}
+    >
       <input type="text" value={inputValue} onChange={onChange} />
       <button onClick={addItem}>Add</button>
-    </div>
+    </form>
   );
 };
 
 // 고유한 Id 생성을 위한 유틸리티
 let id = 0;
+
 function getId() {
   return id++;
 }

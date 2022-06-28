@@ -1,10 +1,13 @@
 import React from 'react';
 import WRIndexDateSection from "./WRIndexDateSection";
 import {WRIndexMainCard} from "./WRIndexMainCard";
-import {Box} from "native-base";
+import {ScrollView} from "native-base";
 import dayjs from "dayjs";
 import utc from 'dayjs/plugin/utc';
 import {WRIndexTodayAdvice} from "./WRIndexTodayAdvice";
+import {WRIndexOneLineSummary} from "./WRIndexOneLineSummary";
+import WRIndexComparation from "./WRIndexComparation";
+import {renderDeepComparationData, renderLatencyComparationData, renderRemComparationData} from "./index.helper";
 
 
 // type WRIndexContentsProps = {
@@ -26,7 +29,7 @@ dayjs.extend(utc);
 dayjs.locale('ko');
 const WRIndexContents = () => {
     return (
-        <Box bg={"#0D0D0D"} px="4" py="4" flex={1}>
+        <ScrollView bg="#0D0D0D" px="4" py="4" flex={1}>
             <WRIndexDateSection/>
             <WRIndexMainCard data={{
                 tag: {first: "잠 못 이루는 밤", second: "안녕하세여"},
@@ -40,7 +43,14 @@ const WRIndexContents = () => {
                     "내용을 저장하는 REM 수면 비율이 높았어요."
             }}/>
             <WRIndexTodayAdvice advice={"당신은 오늘 깊은 수면은 15%인 게 적당하고 신체를 회복시켜요. 깊은 수면은 15%인 게 적당하고 신체를 회복시켜요."}/>
-        </Box>
+            <WRIndexOneLineSummary data={{
+                actualSleepTime: 500,
+                sleepLatency: 100
+            }}/>
+            <WRIndexComparation data={renderDeepComparationData(99).deepComparation}/>
+            <WRIndexComparation data={renderRemComparationData(78).remComparation}/>
+            <WRIndexComparation data={renderLatencyComparationData(99).latencyComparation}/>
+        </ScrollView>
     );
 };
 

@@ -1,11 +1,8 @@
-import {StyledWRIndexTag} from "../components/WRIndex.styled";
-import {Box} from "native-base";
+import {WRIndexContents} from "../components/WRIndexContents";
 
 export default function App() {
     return (
-        <Box>
-            <StyledWRIndexTag/>
-        </Box>
+        <WRIndexContents/>
     )
 }
 

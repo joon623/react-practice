@@ -1,0 +1,1 @@
+{"ast":null,"code":"// Wrap\nexport var Wrap = {};","map":{"version":3,"sources":["/Users/jun/Desktop/dev/react-practice/with-react-native-web-app/node_modules/native-base/src/theme/components/wrap.ts"],"names":["Wrap"],"mappings":"AAAA;AACA,OAAO,IAAMA,IAAI,GAAV,EAAA","sourcesContent":["// Wrap\nexport const Wrap = {};\n"]},"metadata":{},"sourceType":"module"}

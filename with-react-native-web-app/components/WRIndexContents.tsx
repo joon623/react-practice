@@ -7,7 +7,15 @@ import utc from 'dayjs/plugin/utc';
 import {WRIndexTodayAdvice} from "./WRIndexTodayAdvice";
 import {WRIndexOneLineSummary} from "./WRIndexOneLineSummary";
 import WRIndexComparation from "./WRIndexComparation";
-import {renderDeepComparationData, renderLatencyComparationData, renderRemComparationData} from "./index.helper";
+import {
+    INITIAL_SLEEP_STAGE_RATIO,
+    INITIAL_SLEEP_STAGE_TIME,
+    renderDeepComparationData,
+    renderLatencyComparationData,
+    renderRemComparationData,
+    renderSleepStageData
+} from "./index.helper";
+import {WRIndexSleepRatioStackedBar} from "./WRIndexSleepRatioStackedBar";
 
 
 // type WRIndexContentsProps = {
@@ -50,6 +58,8 @@ const WRIndexContents = () => {
             <WRIndexComparation data={renderDeepComparationData(99).deepComparation}/>
             <WRIndexComparation data={renderRemComparationData(78).remComparation}/>
             <WRIndexComparation data={renderLatencyComparationData(99).latencyComparation}/>
+            <WRIndexSleepRatioStackedBar {...renderSleepStageData(INITIAL_SLEEP_STAGE_RATIO,
+                INITIAL_SLEEP_STAGE_TIME).stageValue}/>
         </ScrollView>
     );
 };

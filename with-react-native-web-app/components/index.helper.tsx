@@ -16,6 +16,27 @@ const INITIAL_LATENCY_RATIO = 31;
 const INITIAL_ACTUAL_SLEEP_TIME = 500;
 const INITIAL_LATENCY_TIME = 100;
 
+type SleepStageType = {
+    deep: number;
+    light: number;
+    rem: number;
+    wake: number;
+};
+
+const INITIAL_SLEEP_STAGE_RATIO: SleepStageType = {
+    deep: 18,
+    light: 64,
+    rem: 17,
+    wake: 3,
+};
+
+const INITIAL_SLEEP_STAGE_TIME: SleepStageType = {
+    deep: 130,
+    light: 200,
+    rem: 95,
+    wake: 6,
+};
+
 const renderMinuteToHourTime = (time: number) => {
     if (time < 60) {
         return (
@@ -128,4 +149,40 @@ const renderLatencyComparationData = (latencyValue: number) => {
 };
 
 
-export {renderMinuteToHourTime, renderDeepComparationData, renderLatencyComparationData, renderRemComparationData}
+const renderSleepStageData = (
+    stageRatio: SleepStageType,
+    stageTime: SleepStageType,
+) => {
+    return {
+        stageValue: {
+            stageRatio,
+            stageTime,
+        },
+    };
+};
+
+const COLOR_ALPHA = 0.2;
+const setAlphaValue = (currentRatio: number, currentIndex: number): number => {
+    if (currentRatio === -1) {
+        return 1;
+    }
+
+    if (currentIndex !== currentRatio) {
+        return COLOR_ALPHA;
+    } else {
+        return 1;
+    }
+};
+
+export {
+    renderMinuteToHourTime,
+    renderDeepComparationData,
+    renderLatencyComparationData,
+    renderRemComparationData,
+    renderSleepStageData,
+    INITIAL_SLEEP_STAGE_RATIO,
+    INITIAL_SLEEP_STAGE_TIME, setAlphaValue
+
+
+}
+

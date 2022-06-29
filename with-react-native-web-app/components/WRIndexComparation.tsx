@@ -51,7 +51,6 @@ const BAR_DEFAULT_HEIGHT_PX = `${BAR_DEFAULT_HEIGHT}px`;
 type CriteriaType = 'user' | 'criteria';
 
 const WRIndexComparation: FC<WRIndexComparationProps> = ({data}) => {
-    console.log(data)
     const barStyle = {
         width: '52px',
         borderTopRadius: "11px"
@@ -185,18 +184,22 @@ const WRIndexComparation: FC<WRIndexComparationProps> = ({data}) => {
                 <VStack
                     alignItems='center'
                 >
-                    <Text
+                    <Box
                         background={`${setFontBackgroundColor()}`}
-                        color={`${setUserValueColor()}`}
-                        fontSize='13px'
-                        fontWeight={600}
-                        lineHeight='20px'
                         mb='13px'
-                        p='2px'
+                        py='2px'
+                        px='8px'
                         borderRadius='9px'
                     >
-                        {data.renderEvaluation()}
-                    </Text>
+                        <Text
+                            color={`${setUserValueColor()}`}
+                            fontSize='13px'
+                            fontWeight={600}
+                            lineHeight='20px'
+                        >
+                            {data.renderEvaluation()}
+                        </Text>
+                    </Box>
                     <Box
                         background={`${setUserValueColor()}`}
                         height={`${

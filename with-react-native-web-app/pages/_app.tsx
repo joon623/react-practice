@@ -3,6 +3,15 @@ import Head from 'next/head'
 import {AppProps} from "next/app";
 import {extendTheme, NativeBaseProvider} from 'native-base';
 
+
+const LinearGradient = require("expo-linear-gradient").LinearGradient;
+
+const config = {
+    dependencies: {
+        "linear-gradient": LinearGradient
+    }
+};
+
 const newColorTheme = {
     brand: {
         900: '#8287af',
@@ -14,7 +23,7 @@ const theme = extendTheme({colors: newColorTheme});
 
 function MyApp({Component, pageProps}: AppProps) {
     return (
-        <NativeBaseProvider theme={theme}>
+        <NativeBaseProvider theme={theme} config={config}>
             <Head>
                 <meta name="viewport" content="width=device-width, initial-scale=1"/>
             </Head>

@@ -141,7 +141,7 @@ const renderLatencyComparationData = (latencyValue: number) => {
             subTitle: '* 눈을 감고 30분 안에 잠들면 정상입니다.',
             unit: '분',
             user: {
-                category: '나의 잠드는 데\n걸린 시간',
+                category: '나의 잠드는 데 걸린 시간',
                 value: latencyValue,
             },
         },

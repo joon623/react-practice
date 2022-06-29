@@ -1,5 +1,5 @@
 import React, {FC, useCallback, useEffect, useState} from 'react';
-import {Box, HStack, Text, VStack, ZStack} from "native-base";
+import {Box, HStack, Text, VStack} from "native-base";
 import {useMount} from "react-use";
 import map from 'lodash/map';
 import {renderMinuteToHourTime, setAlphaValue} from "./index.helper";
@@ -233,6 +233,7 @@ const WRIndexSleepRatioStackedBar: FC<WRIndexSleepRatioStackedBarProps> = ({
     return (
         <Box
             mt='51px'
+            onClick={resetCurrentRatio}
         >
             <Text
                 fontSize="24px"
@@ -247,36 +248,45 @@ const WRIndexSleepRatioStackedBar: FC<WRIndexSleepRatioStackedBarProps> = ({
                 background="#1C1C1E"
                 borderRadius='24px'
                 p='27px'
+                position='relative'
             >
                 <Box
                     ref={bubble}
                     borderRadius='5px'
                     lineHeight='21px'
-                    p='10px'
                     display={currentRatio === -1 ? 'none' : 'flex'}
+                    transform={`translateX(${calculateLeftValue(currentRatio)}px)`}
+                    transition={`transform 0.5s ease-in`}
+                    left={0}
+                    position='absolute'
+                    top='-10px'
+                    justifyContent='center'
+                    alignItems='center'
+                    background='#494949'
+                    w='57px'
+                    h='41px'
                 >
-                    <ZStack
-                        justifyContent='center'
-                        alignItems='center'
+                    <Box
+                        background='#494949'
+                        position='absolute'
+                        bottom='-5px'
+                        left='6px'
+                        w='8px'
+                        h='16px'
+                        transform='matrix(0, -1, -1, 0, 0, 0)'
+                    />
+                    <Text
+                        color='white'
+                        fontSize='15px'
+                        lineHeight='21px'
+                        fontWeight={600}
                     >
-                        <Box
-                            background='#494949'
-                            borderRadius="5px"
-                            w='57px'
-                            h='41px'
-                            position='absolute'
-                            clipPath='polygon(0% 0%, 100% 100%, 100% 0%)'
-                        />
-                        <Text
-                            color='white'
-                            fontSize='15px'
-
-                        >
-                            {sleepRatioDataState[currentRatio]?.sleepRatio ?? 0}%
-                        </Text>
-                    </ZStack>
+                        {sleepRatioDataState[currentRatio]?.sleepRatio ?? 0}%
+                    </Text>
                 </Box>
-                <HStack>
+                <HStack
+                    zIndex={-1}
+                >
                     {map(sleepRatioDataState, (el, idx) => {
                         return (
                             <WRIndexSleepRatioBar
@@ -311,11 +321,11 @@ const WRIndexSleepRatioStackedBar: FC<WRIndexSleepRatioStackedBarProps> = ({
                                 idx
                             ) => (
                                 <HStack
-                                    h='83px'
                                     opacity={`${setAlphaValue(currentRatio, idx)}`}
                                     onClick={() => {
                                         setCurrentRatio(idx);
                                     }}
+                                    h='52px'
                                     justifyContent='space-between'
                                 >
                                     <HStack>
@@ -323,8 +333,8 @@ const WRIndexSleepRatioStackedBar: FC<WRIndexSleepRatioStackedBarProps> = ({
                                             background={background}
                                             w='8px'
                                             h='8px'
-                                            mt='2px'
-                                            mr='2px'
+                                            mt='6px'
+                                            mr='10px'
                                             borderRadius='2px'
                                         />
                                         <VStack>
@@ -334,7 +344,6 @@ const WRIndexSleepRatioStackedBar: FC<WRIndexSleepRatioStackedBarProps> = ({
                                             <Text
                                                 color={subTitleColor}
                                             >{renderMinuteToHourTime(time)}</Text>
-
                                         </VStack>
                                     </HStack>
                                     <Text

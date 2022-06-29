@@ -7,6 +7,7 @@
   },
   "dependencies": {
     "dayjs": "^1.11.3",
+    "expo-linear-gradient": "^11.3.0",
     "ky": "^0.31.0",
     "loadsh": "^0.0.4",
     "native-base": "^3.4.7",

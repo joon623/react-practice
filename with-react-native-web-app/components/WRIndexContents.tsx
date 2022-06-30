@@ -41,12 +41,11 @@ const WRIndexContents: FC<WRIndexContentsProps> = ({isLoading}) => {
     return (
         <ScrollView
             bg="#0D0D0D"
-            h={`${isLoading ? '100%' : "auto"}`}
             px='16px'
             pb='85px'
-            display='flex'
-            flex={1}
-            flewDirection='column'
+            _contentContainerStyle={{
+                flex: "1"
+            }}
         >
             <WRIndexDateSection/>
             {isLoading ? <WRIndexLoadingIndicator/> :
@@ -62,7 +61,8 @@ const WRIndexContents: FC<WRIndexContentsProps> = ({isLoading}) => {
                         oneLineComment: "낮에 있었던 스트레스를 완화하고, 학습한" +
                             "내용을 저장하는 REM 수면 비율이 높았어요."
                     }}/>
-                    <WRIndexTodayAdvice advice={"당신은 오늘 깊은 수면은 15%인 게 적당하고 신체를 회복시켜요. 깊은 수면은 15%인 게 적당하고 신체를 회복시켜요."}/>
+                    <WRIndexTodayAdvice
+                        advice={"당신은 오늘 깊은 수면은 15%인 게 적당하고 신체를 회복시켜요. 깊은 수면은 15%인 게 적당하고 신체를 회복시켜요."}/>
                     <WRIndexOneLineSummary data={{
                         actualSleepTime: 500,
                         sleepLatency: 100
@@ -74,7 +74,6 @@ const WRIndexContents: FC<WRIndexContentsProps> = ({isLoading}) => {
                         INITIAL_SLEEP_STAGE_TIME).stageValue}/>
                 </>
             }
-
         </ScrollView>
     );
 };

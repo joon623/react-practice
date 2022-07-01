@@ -4,8 +4,9 @@ export default function App() {
     return (
         <>
             <WRIndexContents
-                isLoading={true}
+                isLoading={false}
             />
+            {/*<WRIndexNetworkError/>*/}
             {/*<WRIndexInitialBottom/>*/}
         </>
     )

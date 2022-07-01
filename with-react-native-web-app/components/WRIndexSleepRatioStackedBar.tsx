@@ -1,10 +1,14 @@
 import React, {FC, useCallback, useEffect, useState} from 'react';
 import {Box, HStack, Text, VStack} from "native-base";
-import {useMount} from "react-use";
 import map from 'lodash/map';
 import {renderMinuteToHourTime, setAlphaValue} from "./index.helper";
 import {WRIndexSleepRatioBar} from "./WRIndexSleepRatioBar";
-
+import SpeechBubbleBottomIcon from "../public/images/speechBubbleBottom.svg"
+import {
+    WebviewIndexInnerPadding,
+    WebviewIndexSleepRatioStackedBarBottomSpeechBubbleLeft,
+    WebviewIndexSleepRatioStackedBarBottomSpeechBubbleLeftPX
+} from "../variables";
 
 /*
  * ratio 순서
@@ -43,7 +47,7 @@ const WRIndexSleepRatioStackedBar: FC<WRIndexSleepRatioStackedBarProps> = ({
                                                                                stageTime,
                                                                            }) => {
     const [currentRatio, setCurrentRatio] = useState(-1);
-    const [sleepRatioDataState, setSleepRatioData] = useState<SleepRatioDataType[]>([
+    const [sleepRatioDataState] = useState<SleepRatioDataType[]>([
         {
             background: `rgba(242, 162, 64, 1)`,
             category: '일반잠',
@@ -81,7 +85,10 @@ const WRIndexSleepRatioStackedBar: FC<WRIndexSleepRatioStackedBarProps> = ({
             subTitleColor: `rgba(165, 165, 165, 1)`,
             time: stageTime.rem,
         },
-    ]);
+    ].sort((a: SleepRatioDataType, b: SleepRatioDataType) => {
+        return b.sleepRatio - a.sleepRatio;
+    }));
+
 
     const bubble = React.createRef<HTMLDivElement>();
     const r1 = React.createRef<HTMLDivElement>();
@@ -111,7 +118,7 @@ const WRIndexSleepRatioStackedBar: FC<WRIndexSleepRatioStackedBarProps> = ({
                             (r1.current.getBoundingClientRect().right -
                                 r1.current.getBoundingClientRect().left) /
                             2;
-                        return String(diff - bubbleHalfWidth);
+                        return String(r1.current.getBoundingClientRect().left + diff - bubbleHalfWidth - WebviewIndexInnerPadding + WebviewIndexSleepRatioStackedBarBottomSpeechBubbleLeft);
                     }
                     case 1: {
                         const diff2 =
@@ -119,10 +126,8 @@ const WRIndexSleepRatioStackedBar: FC<WRIndexSleepRatioStackedBarProps> = ({
                                 r2.current.getBoundingClientRect().left) /
                             2;
                         return String(
-                            r2.current.getBoundingClientRect().left +
-                            diff2 -
-                            bubbleHalfWidth -
-                            r1.current.getBoundingClientRect().left,
+                            r2.current.getBoundingClientRect().left + diff2 - bubbleHalfWidth
+                            - WebviewIndexInnerPadding + WebviewIndexSleepRatioStackedBarBottomSpeechBubbleLeft,
                         );
                     }
                     case 2: {
@@ -133,8 +138,8 @@ const WRIndexSleepRatioStackedBar: FC<WRIndexSleepRatioStackedBarProps> = ({
                         return String(
                             r3.current.getBoundingClientRect().left +
                             diff3 -
-                            bubbleHalfWidth -
-                            r1.current.getBoundingClientRect().left,
+                            bubbleHalfWidth
+                            - WebviewIndexInnerPadding + WebviewIndexSleepRatioStackedBarBottomSpeechBubbleLeft,
                         );
                     }
                     case 3: {
@@ -145,8 +150,8 @@ const WRIndexSleepRatioStackedBar: FC<WRIndexSleepRatioStackedBarProps> = ({
                         return String(
                             r4.current.getBoundingClientRect().left +
                             diff4 -
-                            bubbleHalfWidth -
-                            r1.current.getBoundingClientRect().left,
+                            bubbleHalfWidth
+                            - WebviewIndexInnerPadding + WebviewIndexSleepRatioStackedBarBottomSpeechBubbleLeft
                         );
                     }
                     default: {
@@ -159,13 +164,6 @@ const WRIndexSleepRatioStackedBar: FC<WRIndexSleepRatioStackedBarProps> = ({
         },
         [r1, r2, r3, r4, bubble],
     );
-
-    useMount(() => {
-        sleepRatioDataState.sort((a: SleepRatioDataType, b: SleepRatioDataType) => {
-            return b.sleepRatio - a.sleepRatio;
-        });
-        setSleepRatioData(sleepRatioDataState);
-    });
 
     useEffect(() => {
         if (currentRatio === -1) {
@@ -255,8 +253,7 @@ const WRIndexSleepRatioStackedBar: FC<WRIndexSleepRatioStackedBarProps> = ({
                     borderRadius='5px'
                     lineHeight='21px'
                     display={currentRatio === -1 ? 'none' : 'flex'}
-                    transform={`translateX(${calculateLeftValue(currentRatio)}px)`}
-                    transition={`transform 0.5s ease-in`}
+                    transition='transform 0.5s ease-in'
                     left={0}
                     position='absolute'
                     top='-10px'
@@ -267,14 +264,14 @@ const WRIndexSleepRatioStackedBar: FC<WRIndexSleepRatioStackedBarProps> = ({
                     h='41px'
                 >
                     <Box
-                        background='#494949'
                         position='absolute'
-                        bottom='-5px'
-                        left='6px'
-                        w='8px'
-                        h='16px'
-                        transform='matrix(0, -1, -1, 0, 0, 0)'
-                    />
+                        bottom='-6px'
+                        left={WebviewIndexSleepRatioStackedBarBottomSpeechBubbleLeftPX}
+                    >
+                        <SpeechBubbleBottomIcon
+                            color='#494949'
+                        />
+                    </Box>
                     <Text
                         color='white'
                         fontSize='15px'
@@ -302,8 +299,9 @@ const WRIndexSleepRatioStackedBar: FC<WRIndexSleepRatioStackedBarProps> = ({
                         );
                     })}
                 </HStack>
-                <Box ref={ratioSection}
-                     mt={9}
+                <Box
+                    ref={ratioSection}
+                    mt={9}
                 >
                     {
                         map(
@@ -321,6 +319,7 @@ const WRIndexSleepRatioStackedBar: FC<WRIndexSleepRatioStackedBarProps> = ({
                                 idx
                             ) => (
                                 <HStack
+                                    key={'SLEEP_RATIO_DATA' + id}
                                     opacity={`${setAlphaValue(currentRatio, idx)}`}
                                     onClick={() => {
                                         setCurrentRatio(idx);

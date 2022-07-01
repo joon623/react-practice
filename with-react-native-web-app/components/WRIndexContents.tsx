@@ -17,6 +17,7 @@ import {
 } from "./index.helper";
 import {WRIndexSleepRatioStackedBar} from "./WRIndexSleepRatioStackedBar";
 import {WRIndexLoadingIndicator} from "./WRIndexLoadingIndicator";
+import {WebviewIndexInnerPaddingPX} from "../variables";
 
 
 type WRIndexContentsProps = {
@@ -41,10 +42,10 @@ const WRIndexContents: FC<WRIndexContentsProps> = ({isLoading}) => {
     return (
         <ScrollView
             bg="#0D0D0D"
-            px='16px'
-            pb='85px'
             _contentContainerStyle={{
-                flex: "1"
+                height: `${isLoading ? '100vh' : "auto"}`,
+                pb: "85px",
+                px: WebviewIndexInnerPaddingPX,
             }}
         >
             <WRIndexDateSection/>

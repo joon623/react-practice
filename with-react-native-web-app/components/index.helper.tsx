@@ -174,6 +174,9 @@ const setAlphaValue = (currentRatio: number, currentIndex: number): number => {
     }
 };
 
+const DATE_FORMAT_INDEX_TOP_DATE = 'M월 DD일 dddd';
+const DATE_FORMAT_QUERY_DATE = 'YYYY-MM-DD';
+
 export {
     renderMinuteToHourTime,
     renderDeepComparationData,
@@ -181,8 +184,8 @@ export {
     renderRemComparationData,
     renderSleepStageData,
     INITIAL_SLEEP_STAGE_RATIO,
-    INITIAL_SLEEP_STAGE_TIME, setAlphaValue
-
-
+    INITIAL_SLEEP_STAGE_TIME, setAlphaValue,
+    DATE_FORMAT_INDEX_TOP_DATE,
+    DATE_FORMAT_QUERY_DATE
 }
 

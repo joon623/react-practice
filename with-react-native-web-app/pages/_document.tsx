@@ -1,7 +1,8 @@
 import {Children} from 'react'
-import Document, {Head, Html, Main, NextScript} from 'next/document'
+import {default as NextDocument, Head, Html, Main, NextScript} from 'next/document'
 import {AppRegistry} from 'react-native'
 import config from '../app.json'
+import {Sheet} from "styletron-engine-atomic";
 // Force Next-generated DOM elements to fill their parent's height
 const normalizeNextElements = `
   #__next {
@@ -12,7 +13,9 @@ const normalizeNextElements = `
 `
 
 
-export default class MyDocument extends Document {
+export default class MyDocument extends NextDocument<{
+    stylesheets: Sheet[];
+}> {
     static async getInitialProps({renderPage}) {
         AppRegistry.registerComponent(config.name, () => Main)
         const {getStyleElement} = AppRegistry.getApplication(config.name)

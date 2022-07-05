@@ -43,6 +43,4 @@ function foo() {
         },
     };
 
-    console.log(Object.assign(b1, b2));
-    console.log(b1);
 }

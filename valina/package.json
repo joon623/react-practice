@@ -1,0 +1,14 @@
+{
+  "devDependencies": {
+    "typescript": "^4.6.4"
+  },
+  "name": "valina",
+  "version": "1.0.0",
+  "main": "class.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}

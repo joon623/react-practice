@@ -1,0 +1,25 @@
+body {
+    font-family: sans-serif;
+    background: #f0f5f9;
+}
+
+.list {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+}
+
+.list-item {
+    flex-shrink: 0;
+    scroll-snap-align: start;
+    width: 100vw;
+    height: 300px;
+    background: #e57060;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.list-item:nth-child(2n) {
+    background: #606ee5;
+}

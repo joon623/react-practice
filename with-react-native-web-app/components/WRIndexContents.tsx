@@ -48,7 +48,7 @@ const WRIndexContents: FC<WRIndexContentsProps> = ({isLoading}) => {
                 px: WebviewIndexInnerPaddingPX,
             }}
         >
-            <WRIndexDateSection/>
+            <WRIndexDateSection originDate={dayjs()}/>
             {isLoading ? <WRIndexLoadingIndicator/> :
                 <>
                     <WRIndexMainCard data={{
